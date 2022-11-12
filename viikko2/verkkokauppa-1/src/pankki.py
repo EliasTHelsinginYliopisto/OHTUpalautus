@@ -1,4 +1,4 @@
-from kirjanpito import Kirjanpito
+from kirjanpito import the_kirjanpito_olio
 
 
 class Pankki:
@@ -13,7 +13,7 @@ class Pankki:
         return Pankki.__instanssi
     '''
 
-    def __init__(self, kirjanpito):
+    def __init__(self, kirjanpito = the_kirjanpito_olio):
         self._kirjanpito = kirjanpito
 
     def tilisiirto(self, nimi, viitenumero, tililta, tilille, summa):
@@ -23,3 +23,5 @@ class Pankki:
 
         # täällä olisi koodi joka ottaa yhteyden pankin verkkorajapintaan
         return True
+
+the_pankki_olio = Pankki()

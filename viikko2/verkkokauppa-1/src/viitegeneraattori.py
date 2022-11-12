@@ -18,4 +18,4 @@ class Viitegeneraattori:
 
         return self._seuraava
 
-viitegeneraattori_olio = Viitegeneraattori()
+the_viitegeneraattori_olio = Viitegeneraattori()
