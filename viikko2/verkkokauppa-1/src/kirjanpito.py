@@ -1,4 +1,5 @@
 class Kirjanpito:
+    '''
     __instanssi = None
 
     @staticmethod
@@ -7,6 +8,7 @@ class Kirjanpito:
             Kirjanpito.__instanssi = Kirjanpito()
 
         return Kirjanpito.__instanssi
+    '''
 
     def __init__(self):
         self.tapahtumat = []

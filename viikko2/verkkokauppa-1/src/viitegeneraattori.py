@@ -1,4 +1,5 @@
 class Viitegeneraattori:
+    '''
     __instanssi = None
 
     @staticmethod
@@ -7,6 +8,7 @@ class Viitegeneraattori:
             Viitegeneraattori.__instanssi = Viitegeneraattori()
 
         return Viitegeneraattori.__instanssi
+    '''
 
     def __init__(self):
         self._seuraava = 1
@@ -15,3 +17,5 @@ class Viitegeneraattori:
         self._seuraava = self._seuraava + 1
 
         return self._seuraava
+
+viitegeneraattori_olio = Viitegeneraattori()

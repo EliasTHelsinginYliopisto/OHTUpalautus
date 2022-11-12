@@ -2,6 +2,7 @@ from kirjanpito import Kirjanpito
 
 
 class Pankki:
+    '''
     __instanssi = None
 
     @staticmethod
@@ -10,9 +11,10 @@ class Pankki:
             Pankki.__instanssi = Pankki()
 
         return Pankki.__instanssi
+    '''
 
-    def __init__(self):
-        self._kirjanpito = Kirjanpito.get_instance()
+    def __init__(self, kirjanpito):
+        self._kirjanpito = kirjanpito
 
     def tilisiirto(self, nimi, viitenumero, tililta, tilille, summa):
         self._kirjanpito.lisaa_tapahtuma(
