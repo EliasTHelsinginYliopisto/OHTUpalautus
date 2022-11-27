@@ -12,6 +12,8 @@ def main():
     kori.lisaa_tuote(juusto)
     print(kori.ostokset())
     print(kori.ostokset()[0][0])
+    kori.poista_tuote(maito)
+    print(kori.ostokset())
 
 if __name__ == "__main__":
     main()
