@@ -10,9 +10,7 @@ def main():
     kori.lisaa_tuote(maito)
     kori.lisaa_tuote(maito)
     kori.lisaa_tuote(juusto)
-    print(kori.ostokset())
-    print(kori.ostokset()[0][0])
-    kori.poista_tuote(maito)
+    kori.poista_tuote(juusto)
     print(kori.ostokset())
 
 if __name__ == "__main__":
