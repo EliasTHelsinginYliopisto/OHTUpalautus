@@ -97,5 +97,13 @@ class TestOstoskori(unittest.TestCase):
     def test_jos_viimeinen_tuote_poistetaan_kori_on_tyhja(self):
         self.kori.lisaa_tuote(self.tuotteet["Maito"])
         self.kori.poista_tuote(self.tuotteet["Maito"])
-        ostos = self.kori.ostokset()
-        self.assertEqual(len(ostos), 0)
+        ostokset = self.kori.ostokset()
+        self.assertEqual(len(ostokset), 0)
+
+    #5.15
+    def test_tyhjenna_tyhjentaa_ostoskorin(self):
+        self.kori.lisaa_tuote(self.tuotteet["Maito"])
+        self.kori.lisaa_tuote(self.tuotteet["Juusto"])
+        self.kori.tyhjenna()
+        ostokset = self.kori.ostokset()
+        self.assertEqual(len(ostokset), 0)
