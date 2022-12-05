@@ -9,20 +9,24 @@ class Komento(Enum):
     KUMOA = 4
 
 class Summa:
-        def __init__(self, sovellus, syöte):
-            self._sovellus = sovellus
-            self.syöte = int(syöte)
-        
-        def suorita(self):
-            self._sovellus.plus(self.syöte)
+    def __init__(self, sovellus, syöte):
+        self._sovellus = sovellus
+        self.syöte = int(syöte)
+    
+    def suorita(self):
+        edellinen_tulos = self._sovellus.tulos
+        self._sovellus.plus(self.syöte)
+        return edellinen_tulos
 
 class Erotus:
-        def __init__(self, sovellus, syöte):
-            self._sovellus = sovellus
-            self._syöte = int(syöte)
-        
-        def suorita(self):
-            self._sovellus.miinus(self._syöte)
+    def __init__(self, sovellus, syöte):
+        self._sovellus = sovellus
+        self._syöte = int(syöte)
+    
+    def suorita(self):
+        edellinen_tulos = self._sovellus.tulos
+        self._sovellus.miinus(self._syöte)
+        return edellinen_tulos
 
 class Nollaus:
     def __init__(self, sovellus, syöte):
@@ -30,7 +34,9 @@ class Nollaus:
         self._syöte = int(syöte)
     
     def suorita(self):
+        edellinen_tulos = self._sovellus.tulos
         self._sovellus.nollaa()
+        return edellinen_tulos
 
 class Kumoa:
     def __init__(self, sovellus, syöte):
@@ -38,7 +44,9 @@ class Kumoa:
         self._syöte = int(syöte)
     
     def suorita(self):
-        pass
+        edellinen_tulos = self._sovellus.tulos
+        self._sovellus.aseta_arvo(self._syöte)
+        return edellinen_tulos
 
 
 
@@ -48,10 +56,14 @@ class Kayttoliittyma:
         self._sovellus = sovellus
         self._root = root
         self._komennot = {}
+        self.edellinen_tulos = 0
         
     
     def _lue_syote(self):
-        return self._syote_kentta.get()
+        value = self._syote_kentta.get()
+        if value == '':
+            return 0
+        return value
     
     
 
@@ -100,11 +112,11 @@ class Kayttoliittyma:
         Komento.SUMMA: Summa(self._sovellus, self._lue_syote()),
         Komento.EROTUS: Erotus(self._sovellus, self._lue_syote()),
         Komento.NOLLAUS: Nollaus(self._sovellus, self._lue_syote()),
-        Komento.KUMOA: Kumoa(self._sovellus, self._lue_syote())
+        Komento.KUMOA: Kumoa(self._sovellus, self.edellinen_tulos)
         }
 
         komento_olio = self._komennot[komento]
-        komento_olio.suorita()
+        self.edellinen_tulos = komento_olio.suorita()
         self._kumoa_painike["state"] = constants.NORMAL
 
         if self._sovellus.tulos == 0:
@@ -114,36 +126,3 @@ class Kayttoliittyma:
 
         self._syote_kentta.delete(0, constants.END)
         self._tulos_var.set(self._sovellus.tulos)
-    '''
-    def _suorita_komento(self, komento):
-        arvo = 0
-
-        try:
-            self.arvo = int(self._syote_kentta.get())
-        except Exception:
-            pass
-
-        if komento in self.komennot:
-            self.komennot[komento]
-
-        
-        if komento == Komento.SUMMA:
-            self._sovellus.plus(arvo)
-        elif komento == Komento.EROTUS:
-            self._sovellus.miinus(arvo)
-        elif komento == Komento.NOLLAUS:
-            self._sovellus.nollaa()
-        elif komento == Komento.KUMOA:
-            pass
-        
-        
-        self._kumoa_painike["state"] = constants.NORMAL
-
-        if self._sovellus.tulos == 0:
-            self._nollaus_painike["state"] = constants.DISABLED
-        else:
-            self._nollaus_painike["state"] = constants.NORMAL
-
-        self._syote_kentta.delete(0, constants.END)
-        self._tulos_var.set(self._sovellus.tulos)
-    '''
